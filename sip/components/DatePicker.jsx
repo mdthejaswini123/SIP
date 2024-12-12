@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Icon from 'react-native-vector-icons/MaterialIcons'; // Import the icon library
@@ -21,7 +21,7 @@ const formatDayWithSuffix = (day) => {
   }
 };
 
-const DatePicker = ({ onDateSelect }) => {
+const DatePicker = ({ onDateSelect, visibility }) => {
   const [date, setDate] = useState(new Date());
   const [showPicker, setShowPicker] = useState(false);
 
@@ -48,17 +48,18 @@ const DatePicker = ({ onDateSelect }) => {
   // Get the formatted day with suffix
   const formattedDay = formatDayWithSuffix(date.getDate());
 
+
   return (
-    <View style={styles.container}>
+    <View style={styles.containerDate}>
       {/* Date of Investment Button */}
-      <Text style={styles.label2}>Date of Investment (Each Month) *</Text>
+      <Text style={styles.label1}>Date of Investment (Each Month) *</Text>
       <TouchableOpacity onPress={() => setShowPicker(true)} style={styles.dateButton}>
         <Text style={styles.dateText}>
           {formattedDay} of every month
         </Text>
         <Icon name="calendar-today" size={24} color="#D1A8EB" style={styles.icon} />
       </TouchableOpacity>
-
+ 
       {/* Date Picker */}
       {showPicker && (
         <DateTimePicker
@@ -75,7 +76,7 @@ const DatePicker = ({ onDateSelect }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginVertical: 20,
+    marginVertical: 10,
   },
   dateButton: {
     flexDirection: 'row',
